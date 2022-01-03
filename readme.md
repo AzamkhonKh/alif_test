@@ -6,9 +6,11 @@ here is the <a href="https://www.dropbox.com/s/xt07pmofl5k5po7/alif_test.txt?dl=
 ### CLI in PHP
 
 ##### HOW TO START ?
-got to the project folder and write:
+1. set up your database with {project folder}/migration/up_db.sql
+2. write correct db data in {project folder}/config.php
+3. got to the project folder and write:
 
-`php cli_front.php`
+    `php cli_front.php`
 
 environment:
 
