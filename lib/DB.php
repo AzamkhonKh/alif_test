@@ -2,6 +2,8 @@
 
 namespace lib;
 
+use DateTime;
+
 class DB
 {
     public $db_conn = null;
@@ -21,6 +23,12 @@ class DB
             throw new \Exception("host, dbname, dbuser, dbpassword should be given in config file !");
         }
 
+    }
+
+    public static function checkDate($date)
+    {
+        $dt = DateTime::createFromFormat("Y-m-d H:m:s", $date);
+        return $dt !== false && !array_sum($dt::getLastErrors());
     }
 
     public function run_query(string $q, $class): array
