@@ -4,9 +4,19 @@ namespace lib;
 
 class Room
 {
-
+    public static string $table = 'rooms';
     public int $id;
     public string $name;
+
+    public static function getRooms(): array
+    {
+        $db = new DB();
+        $query = "SELECT * FROM ".self::$table.";";
+        $res = $db->run_query($query,self::class);
+        $db->close_conn();
+        return $res;
+
+    }
 
     /**
      * @throws \Exception

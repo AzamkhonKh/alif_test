@@ -10,24 +10,13 @@ require "autoloader.php";
  * */
 $handle = fopen("php://stdin", "r");
 $line = "";
+$user = null;
 do {
     try {
-        $line = fgets($handle);
-        switch (trim($line)){
-            case "exit":{
-                echo "exiting ...";
-                exit();
-                break;
-            }
-            case "adduser":{
-                \lib\commands::adduserProcedure($handle);
-                break;
-            }
-            default:{
-                if (!empty(trim($line))){
-                    echo "repeated: " . $line;
-                }
-            }
+        if (is_null($user)){
+            \lib\commands::notLoggedInCommands($handle,$user);
+        }else{
+            \lib\commands::LoggedIn($handle,$user);
         }
     } catch (Exception $e) {
         echo $e->getMessage() . "\r\n";

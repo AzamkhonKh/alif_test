@@ -26,4 +26,75 @@ class commands
         echo "\r\n the user with name {$result->name} got id {$result->id}";
     }
 
+    public static function loginProcedure($handle): ?User
+    {
+        echo "write username: ";
+        $username = trim(fgets($handle));
+        $user = User::find($username);
+        if ($username == $user->name){
+            echo "success logged in ! \r\n";
+            return $user;
+        }
+        return null;
+    }
+
+    public static function notLoggedInCommands($handle,&$user)
+    {
+
+        $line = fgets($handle);
+
+        switch (trim($line)){
+            case "exit":{
+                echo "exiting ...";
+                exit();
+                break;
+            }
+            case "adduser":{
+                \lib\commands::adduserProcedure($handle);
+                break;
+            }
+            case "login":{
+                $user = \lib\commands::loginProcedure($handle);
+                break;
+            }
+            default:{
+                if (!empty(trim($line))){
+                    echo "repeated: " . $line;
+                }
+            }
+        }
+    }
+
+    public static function LoggedIn($handle, User $user)
+    {
+        echo $user->name.": ";
+        $line = fgets($handle);
+
+        switch (trim($line)) {
+            case "exit":
+            {
+                echo "exiting ... \r\n";
+                exit();
+                break;
+            }
+            case "adduser":
+            {
+                \lib\commands::adduserProcedure($handle);
+                break;
+            }
+            case "list":{
+                self::listRooms();
+                break;
+            }
+        }
+    }
+
+    private static function listRooms()
+    {
+        $rooms = Room::getRooms();
+        foreach ($rooms as $room){
+            echo "{$room->id}. {$room->name} \r\n";
+        }
+    }
+
 }
