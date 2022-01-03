@@ -18,6 +18,19 @@ class Room
 
     }
 
+    public static function getRoomIds()
+    {
+        $db = new DB();
+        $query = "SELECT * FROM ".self::$table.";";
+        $res = $db->run_query($query,self::class);
+        $db->close_conn();
+        $result = array();
+        foreach ($res as $r){
+            $result[] = $r->id;
+        }
+        return $result;
+    }
+
     /**
      * @throws \Exception
      */

@@ -57,6 +57,10 @@ class commands
                 $user = \lib\commands::loginProcedure($handle);
                 break;
             }
+            case "test":{
+                print_r();
+                break;
+            }
             default:{
                 if (!empty(trim($line))){
                     echo "repeated: " . $line;
@@ -82,6 +86,11 @@ class commands
                 \lib\commands::adduserProcedure($handle);
                 break;
             }
+            case "checkRoom":
+            {
+                \lib\commands::checkRoom($handle);
+                break;
+            }
             case "list":{
                 self::listRooms();
                 break;
@@ -95,6 +104,26 @@ class commands
         foreach ($rooms as $room){
             echo "{$room->id}. {$room->name} \r\n";
         }
+    }
+
+    private static function checkRoom($handle)
+    {
+        echo "let's check room availability there is list of rooms: \r\n";
+        self::listRooms();
+        echo "input id of room: ";
+        $room_ids = Room::getRoomIds();
+        $room_id = trim(fgets($handle));
+        while (!is_numeric($room_id) && !in_array(intval($room_id),$room_ids)){
+            echo "invalid id of room type again: ";
+            $room_id = trim(fgets($handle));
+        }
+        echo "let's get active schedule of this room for today: \r\n";
+        $room_schedule = Schedule::getRoomData(intval($room_id));
+        foreach ($room_schedule as $key => $rs){
+            $count = $key + 1;
+            echo "{$count}. {$rs->start_from} - {$rs->end_on}\r\n";
+        }
+
     }
 
 }
