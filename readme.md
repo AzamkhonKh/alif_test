@@ -4,6 +4,12 @@ here is the <a href="https://www.dropbox.com/s/xt07pmofl5k5po7/alif_test.txt?dl=
 <hr>
 
 ### CLI in PHP
+
+##### HOW TO START ?
+got to the project folder and write:
+
+`php cli_front.php`
+
 environment:
 
 - php 7.4
