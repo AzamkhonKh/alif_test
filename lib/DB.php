@@ -25,7 +25,7 @@ class DB
 
     }
 
-    public static function checkDate($date)
+    public static function checkDate($date): bool
     {
         $dt = DateTime::createFromFormat("Y-m-d H:m:s", $date);
         return $dt !== false && !array_sum($dt::getLastErrors());

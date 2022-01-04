@@ -2,7 +2,9 @@
 
 return [
     'host' => 'localhost',
-    'dbname' => '',
-    'dbuser' => '',
-    'dbpassword' => ''
+    'dbname' => 'alif_test',
+    'dbuser' => 'azamkhon',
+    'dbpassword' => '11111111',
+    'mailName' => 'azamboboboeee@gmail.com',
+    'mailPassword' => 'gnjvyrmjqduwygip'
 ];

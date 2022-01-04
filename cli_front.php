@@ -1,6 +1,8 @@
 <?php
 // get arguments
 require "autoloader.php";
+require "vendor/autoload.php";
+
 /*
  * features
  *  - create user and login

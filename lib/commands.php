@@ -38,6 +38,9 @@ class commands
         return null;
     }
 
+    /**
+     * @throws \PHPMailer\PHPMailer\Exception
+     */
     public static function notLoggedInCommands($handle, &$user)
     {
 
@@ -62,7 +65,8 @@ class commands
             }
             case "test":
             {
-                print_r();
+                $mail = new Mailsender();
+                $mail->send("azamkhon.kh@gmail.com","from test alif","hello there boris on call !");
                 break;
             }
             default:
@@ -164,7 +168,7 @@ class commands
             $end_time = trim(fgets($handle));
         }
         echo "okay, trying to write on my pad ... \r\n";
-        $schedule = Schedule::setNewSchedule($room_id,$start_time,$end_time,$user->id);
+        $schedule = Schedule::setNewSchedule($room_id,$start_time,$end_time,$user);
         if (!is_null($schedule)){
             echo "success ! here inserted result";
             print_r($schedule);
